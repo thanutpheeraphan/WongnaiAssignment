@@ -1,7 +1,6 @@
 package com.example.wongnaiassignment.Repository
 
 import com.example.wongnaiassignment.Model.ResponseData
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -9,6 +8,8 @@ import retrofit2.http.Query
 interface RetroService {
 
     @GET("coins")
-    suspend fun getDataWithLimit(@Query("limit") limit: Int): ResponseData
+    suspend fun getDataWithLimit(@Query("offset") offset: Int,
+                                 @Query("limit") limit: Int ,
+                                 ): ResponseData
 
 }

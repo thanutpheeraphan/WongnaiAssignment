@@ -1,40 +1,57 @@
 package com.example.wongnaiassignment.Adapter
-//
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import androidx.recyclerview.widget.RecyclerView
-//import com.bumptech.glide.Glide
-//import com.example.wongnaiassignment.Model.Coins
-//import com.example.wongnaiassignment.R
-//import kotlinx.android.synthetic.main.item_container_coins.view.*
-//
-//
-//class CoinItemAdapter : RecyclerView.Adapter<CoinItemAdapter.MyViewHolder>() {
-//
-//    private var myList = ArrayList<Coins>()
-//
-//    inner class MyViewHolder(itemView : View): RecyclerView.ViewHolder(itemView)
-//
-//
-//    override fun onCreateViewHolder(
-//        parent: ViewGroup,
-//        viewType: Int
-//    ): MyViewHolder {
-//        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_container_coins,parent,false))
-//    }
-//
-//    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-////        holder.itemView.coin_image = myList[position].iconUrl
-//        holder.itemView.coin_description.text = myList[position].description
-//        holder.itemView.coin_name.text = myList[position].name
-//
-//        val uri = myList[position].iconUrl
-//        Glide.with(holder.itemView.context).load(uri).into(holder.itemView.coin_image)
-//    }
-//
-//    override fun getItemCount(): Int {
-//        return myList.size
-//    }
-//
-//}
+
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.example.wongnaiassignment.Model.Coin
+import com.example.wongnaiassignment.ViewHolder.FifthCoinViewHolder
+import com.example.wongnaiassignment.ViewHolder.NormalCoinViewHolder
+import com.example.wongnaiassignment.databinding.ItemContainerCoinsBinding
+import com.example.wongnaiassignment.databinding.ItemContainerFifthCoinBinding
+import com.example.wongnaiassignment.utils.DiffUtilCallBack
+
+
+class CoinsItemAdapter : PagingDataAdapter<Coin, RecyclerView.ViewHolder>(DiffUtilCallBack()){
+
+
+    companion object {
+        const val VIEW_TYPE_ONE = 1111
+        const val VIEW_TYPE_TWO = 2222
+    }
+
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when(getItemViewType(position)){
+            1111 -> (holder as NormalCoinViewHolder).bind(getItem(position))
+            else -> { // Note the block
+                (holder as FifthCoinViewHolder).bind(getItem(position))
+            }
+        }
+
+
+
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            1111 -> NormalCoinViewHolder(ItemContainerCoinsBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            else -> { // Note the block
+                FifthCoinViewHolder(ItemContainerFifthCoinBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            }
+        }
+    }
+
+
+    override fun getItemViewType(position: Int): Int {
+        val itemId = position +1
+        return if(itemId!=0 && (itemId%5==0)){
+            VIEW_TYPE_TWO
+        } else{
+            VIEW_TYPE_ONE
+        }
+    }
+
+
+}

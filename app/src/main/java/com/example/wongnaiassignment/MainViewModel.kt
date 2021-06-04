@@ -7,35 +7,16 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.wongnaiassignment.DataSource.CoinsListDataSource
-import com.example.wongnaiassignment.Model.Coins
-import com.example.wongnaiassignment.Repository.Repository
+import com.example.wongnaiassignment.Model.Coin
 import com.example.wongnaiassignment.Repository.RetroService
 import com.example.wongnaiassignment.Repository.RetrofitInstance
 import kotlinx.coroutines.flow.Flow
 
-//class MainViewModel(private val repository: Repository): ViewModel() {
-//
-//    val myResponse: MutableLiveData<Response<ResponseData>> = MutableLiveData()
-//
-//    val restaurantByIdResponse: MutableLiveData<Response<ResponseData>> = MutableLiveData()
-//
-//    fun getRestaurantModelById(id: Int){
-//        viewModelScope.launch{
-//            val response = repository.getCoinsByLimitPage(id)
-//            restaurantByIdResponse.value = response
-//        }
-//    }
-//}
+class MainViewModel: ViewModel() {
 
-class MainViewModel(): ViewModel() {
+ var retroService: RetroService = RetrofitInstance.api
 
- lateinit var retroService: RetroService
-
- init {
-     retroService = RetrofitInstance.api
- }
-
-    fun getListData(): Flow<PagingData<Coins>> {
+    fun getListData(): Flow<PagingData<Coin>> {
         return Pager(config = PagingConfig(pageSize = 10,maxSize = 100),
         pagingSourceFactory = {CoinsListDataSource(retroService)}).flow.cachedIn(viewModelScope)
     }
