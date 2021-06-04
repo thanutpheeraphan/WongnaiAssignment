@@ -2,19 +2,20 @@ package com.example.wongnaiassignment.DataSource
 
 import android.util.Log
 import com.example.wongnaiassignment.Model.Coin
-import com.example.wongnaiassignment.Repository.RetroService
+import com.example.wongnaiassignment.Network.RetroService
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import retrofit2.HttpException
 import java.lang.Exception
 
-class CoinsListDataSource(val api: RetroService): PagingSource<Int,Coin>(){
+class CoinsListDataSource(val api: RetroService) : PagingSource<Int, Coin>() {
 
-    companion object{
+    companion object {
         private const val FIRST_PAGE_INDEX = 0
         private const val PAGE_LIMIT = 10
 
     }
+
     override fun getRefreshKey(state: PagingState<Int, Coin>): Int? {
         return state.anchorPosition?.let {
             state.closestPageToPosition(it)?.prevKey?.plus(10)
@@ -26,7 +27,7 @@ class CoinsListDataSource(val api: RetroService): PagingSource<Int,Coin>(){
         return try {
             val nextPage: Int = params.key ?: FIRST_PAGE_INDEX
             Log.d("NEXTKEY", nextPage.toString())
-            val response = api.getDataWithLimit(offset = nextPage,limit = PAGE_LIMIT)
+            val response = api.getDataWithLimit(offset = nextPage, limit = PAGE_LIMIT)
             Log.d("RESPONSE", response.data.coins[0].name.toString())
 
             // Since 0 is the lowest page number, return null to signify no more pages should
@@ -45,11 +46,9 @@ class CoinsListDataSource(val api: RetroService): PagingSource<Int,Coin>(){
                 nextKey = nextKey
             )
 
-        }
-        catch (e: Exception){
+        } catch (e: Exception) {
             LoadResult.Error(e)
-        }
-        catch (e: HttpException) {
+        } catch (e: HttpException) {
             LoadResult.Error(e)
         }
     }

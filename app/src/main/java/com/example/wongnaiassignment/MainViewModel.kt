@@ -8,16 +8,18 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.wongnaiassignment.DataSource.CoinsListDataSource
 import com.example.wongnaiassignment.Model.Coin
-import com.example.wongnaiassignment.Repository.RetroService
-import com.example.wongnaiassignment.Repository.RetrofitInstance
+import com.example.wongnaiassignment.Network.RetroService
+import com.example.wongnaiassignment.Network.RetrofitInstance
 import kotlinx.coroutines.flow.Flow
 
-class MainViewModel: ViewModel() {
+class MainViewModel : ViewModel() {
 
- var retroService: RetroService = RetrofitInstance.api
+    var retroService: RetroService = RetrofitInstance.api
 
     fun getListData(): Flow<PagingData<Coin>> {
-        return Pager(config = PagingConfig(pageSize = 10,maxSize = 100),
-        pagingSourceFactory = {CoinsListDataSource(retroService)}).flow.cachedIn(viewModelScope)
+        return Pager(config = PagingConfig(pageSize = 10, maxSize = 100),
+            pagingSourceFactory = { CoinsListDataSource(retroService) }).flow.cachedIn(
+            viewModelScope
+        )
     }
 }

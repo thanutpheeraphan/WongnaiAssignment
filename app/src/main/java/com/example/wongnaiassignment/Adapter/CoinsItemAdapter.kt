@@ -1,6 +1,5 @@
 package com.example.wongnaiassignment.Adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -13,7 +12,7 @@ import com.example.wongnaiassignment.databinding.ItemContainerFifthCoinBinding
 import com.example.wongnaiassignment.utils.DiffUtilCallBack
 
 
-class CoinsItemAdapter : PagingDataAdapter<Coin, RecyclerView.ViewHolder>(DiffUtilCallBack()){
+class CoinsItemAdapter : PagingDataAdapter<Coin, RecyclerView.ViewHolder>(DiffUtilCallBack()) {
 
 
     companion object {
@@ -23,7 +22,7 @@ class CoinsItemAdapter : PagingDataAdapter<Coin, RecyclerView.ViewHolder>(DiffUt
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(getItemViewType(position)){
+        when (getItemViewType(position)) {
             1111 -> (holder as NormalCoinViewHolder).bind(getItem(position))
             else -> { // Note the block
                 (holder as FifthCoinViewHolder).bind(getItem(position))
@@ -31,24 +30,35 @@ class CoinsItemAdapter : PagingDataAdapter<Coin, RecyclerView.ViewHolder>(DiffUt
         }
 
 
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            1111 -> NormalCoinViewHolder(ItemContainerCoinsBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            1111 -> NormalCoinViewHolder(
+                ItemContainerCoinsBinding.inflate(
+                    LayoutInflater.from(
+                        parent.context
+                    ), parent, false
+                )
+            )
             else -> { // Note the block
-                FifthCoinViewHolder(ItemContainerFifthCoinBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+                FifthCoinViewHolder(
+                    ItemContainerFifthCoinBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
             }
         }
     }
 
 
     override fun getItemViewType(position: Int): Int {
-        val itemId = position +1
-        return if(itemId!=0 && (itemId%5==0)){
+        val itemId = position + 1
+        return if (itemId != 0 && (itemId % 5 == 0)) {
             VIEW_TYPE_TWO
-        } else{
+        } else {
             VIEW_TYPE_ONE
         }
     }
