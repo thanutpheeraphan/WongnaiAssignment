@@ -8,10 +8,14 @@ import androidx.paging.PagingState
 import retrofit2.HttpException
 import java.lang.Exception
 
-class CoinsListDataSource(val api: RetroService) : PagingSource<Int, Coin>() {
+class CoinsListDataSource(
+    private val api: RetroService,
+    private val query: String? = null,
+    private val sort: String? = null
+) : PagingSource<Int, Coin>() {
 
     companion object {
-        private const val FIRST_PAGE_INDEX = 0
+        private const val FIRST_PAGE_OFFSET = 0
         private const val PAGE_LIMIT = 10
 
     }
@@ -25,12 +29,17 @@ class CoinsListDataSource(val api: RetroService) : PagingSource<Int, Coin>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Coin> {
         return try {
-            val nextPage: Int = params.key ?: FIRST_PAGE_INDEX
+            val nextPage: Int = params.key ?: FIRST_PAGE_OFFSET
             Log.d("NEXTKEY", nextPage.toString())
-            val response = api.getDataWithLimit(offset = nextPage, limit = PAGE_LIMIT)
+            val response = api.getDataWithLimit(
+                offset = nextPage,
+                limit = PAGE_LIMIT,
+                prefix = query,
+                sort = sort
+            )
             Log.d("RESPONSE", response.data.coins[0].name.toString())
 
-            // Since 0 is the lowest page number, return null to signify no more pages should
+            // Since 0 is the lowest offset, return null to signify no more pages should
             // be loaded before it.
             val prevKey = if (nextPage > 0) nextPage - 10 else null
 
@@ -38,10 +47,9 @@ class CoinsListDataSource(val api: RetroService) : PagingSource<Int, Coin>() {
 
             // This API defines that it's out of data when a page returns empty. When out of
             // data, we return `null` to signify no more pages should be loaded
-            val nextKey = if (response.data.coins.isNotEmpty()) nextPage + 10 else null
+            val nextKey = if (response.data.coins.size == PAGE_LIMIT) nextPage + 10 else null
             LoadResult.Page(
                 data = response.data.coins,
-//                prevKey = prevKey,
                 prevKey = prevKey,
                 nextKey = nextKey
             )
@@ -52,5 +60,6 @@ class CoinsListDataSource(val api: RetroService) : PagingSource<Int, Coin>() {
             LoadResult.Error(e)
         }
     }
+
 
 }

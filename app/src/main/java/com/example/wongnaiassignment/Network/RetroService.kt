@@ -11,6 +11,8 @@ interface RetroService {
     suspend fun getDataWithLimit(
         @Query("offset") offset: Int,
         @Query("limit") limit: Int,
+        @Query("prefix") prefix: String?,
+        @Query("sort") sort: String?,
     ): ResponseData
 
 }

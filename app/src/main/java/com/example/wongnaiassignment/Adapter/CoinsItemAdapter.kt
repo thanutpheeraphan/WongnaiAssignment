@@ -24,7 +24,7 @@ class CoinsItemAdapter : PagingDataAdapter<Coin, RecyclerView.ViewHolder>(DiffUt
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             1111 -> (holder as NormalCoinViewHolder).bind(getItem(position))
-            else -> { // Note the block
+            else -> {
                 (holder as FifthCoinViewHolder).bind(getItem(position))
             }
         }
@@ -41,7 +41,7 @@ class CoinsItemAdapter : PagingDataAdapter<Coin, RecyclerView.ViewHolder>(DiffUt
                     ), parent, false
                 )
             )
-            else -> { // Note the block
+            else -> {
                 FifthCoinViewHolder(
                     ItemContainerFifthCoinBinding.inflate(
                         LayoutInflater.from(parent.context),
