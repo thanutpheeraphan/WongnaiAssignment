@@ -1,6 +1,5 @@
 package com.example.wongnaiassignment.DataSource
 
-import android.util.Log
 import com.example.wongnaiassignment.Model.Coin
 import com.example.wongnaiassignment.Network.RetroService
 import androidx.paging.PagingSource
@@ -30,24 +29,22 @@ class CoinsListDataSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Coin> {
         return try {
             val nextPage: Int = params.key ?: FIRST_PAGE_OFFSET
-            Log.d("NEXTKEY", nextPage.toString())
-            val response = api.getDataWithLimit(
+            val response = api.getDataWithParams(
                 offset = nextPage,
                 limit = PAGE_LIMIT,
                 prefix = query,
                 sort = sort
             )
-            Log.d("RESPONSE", response.data.coins[0].name.toString())
 
             // Since 0 is the lowest offset, return null to signify no more pages should
             // be loaded before it.
             val prevKey = if (nextPage > 0) nextPage - 10 else null
 
-            Log.d("PREVKEY", nextPage.toString())
 
             // This API defines that it's out of data when a page returns empty. When out of
             // data, we return `null` to signify no more pages should be loaded
             val nextKey = if (response.data.coins.size == PAGE_LIMIT) nextPage + 10 else null
+
             LoadResult.Page(
                 data = response.data.coins,
                 prevKey = prevKey,

@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface RetroService {
 
     @GET("coins")
-    suspend fun getDataWithLimit(
+    suspend fun getDataWithParams(
         @Query("offset") offset: Int,
         @Query("limit") limit: Int,
         @Query("prefix") prefix: String?,

@@ -28,12 +28,12 @@
             android:id="@+id/coin_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
             android:fontFamily="sans-serif"
             android:gravity="start"
             android:text="@string/coin_name"
             android:textAlignment="textStart"
             android:textSize="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="@+id/coin_image"
             app:layout_constraintEnd_toStartOf="@+id/coin_image"
             app:layout_constraintTop_toTopOf="@+id/coin_image" />
