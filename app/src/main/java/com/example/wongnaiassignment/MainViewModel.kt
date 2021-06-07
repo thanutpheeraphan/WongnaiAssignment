@@ -16,7 +16,7 @@ class MainViewModel : ViewModel() {
 
     var retroService: RetroService = RetrofitInstance.api
 
-    fun getListData(query: String? = null, sort: String? = null): Flow<PagingData<Coin>> {
+    fun getCoinData(query: String? = null, sort: String? = null): Flow<PagingData<Coin>> {
         return Pager(config = PagingConfig(pageSize = 10, maxSize = 200),
             pagingSourceFactory = { CoinsListDataSource(retroService, query, sort) }).flow.cachedIn(
             viewModelScope

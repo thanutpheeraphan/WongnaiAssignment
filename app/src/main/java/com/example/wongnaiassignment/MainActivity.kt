@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun beforeTextChanged(query: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     lifecycleScope.launch {
-                        viewModel.getListData().collectLatest {
+                        viewModel.getCoinData().collectLatest {
                             coinsItemAdapter.submitData(lifecycle, PagingData.empty())
 
                         }
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onTextChanged(query: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     lifecycleScope.launch {
-                        viewModel.getListData(query = query.toString()).collectLatest {
+                        viewModel.getCoinData(query = query.toString()).collectLatest {
                             coinsItemAdapter.submitData(it)
 
                         }
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                 override fun afterTextChanged(query: Editable?) {
                     if (query.isNullOrEmpty()) {
                         lifecycleScope.launch {
-                            viewModel.getListData(sort = "coinranking").collectLatest {
+                            viewModel.getCoinData(sort = "coinranking").collectLatest {
                                 coinsItemAdapter.submitData(it)
 
                             }
@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getInitialData() {
         lifecycleScope.launchWhenCreated {
-            viewModel.getListData().collectLatest {
+            viewModel.getCoinData().collectLatest {
                 coinsItemAdapter.submitData(it)
 
             }
