@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wongnaiassignment.Adapter.CoinsItemAdapter
 import com.example.wongnaiassignment.databinding.ActivityMainBinding
@@ -103,9 +102,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.coinRecycleView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            val decoration =
-                DividerItemDecoration(applicationContext, DividerItemDecoration.VERTICAL)
-            addItemDecoration(decoration)
             coinsItemAdapter = CoinsItemAdapter()
             adapter = coinsItemAdapter
 

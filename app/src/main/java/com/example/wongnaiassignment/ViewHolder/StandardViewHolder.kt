@@ -10,12 +10,12 @@ import com.example.wongnaiassignment.R
 import com.example.wongnaiassignment.databinding.ItemContainerCoinsBinding
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 
-class NormalCoinViewHolder(private val binding: ItemContainerCoinsBinding) :
+class StandardViewHolder(private val binding: ItemContainerCoinsBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(data: Coin?) {
         binding.coinName.text = data?.name
 
-        if (data?.description != null) { //this if is used to remove the <p> (html tags) from the description received from the api
+        if (data?.description != null) { //this is used to remove the <p> (html tags) from the description received from the api
             val spanned = Html.fromHtml(data?.description)
             val chars = CharArray(spanned.length)
             TextUtils.getChars(spanned, 0, spanned.length, chars, 0)

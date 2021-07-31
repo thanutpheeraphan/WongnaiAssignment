@@ -1,6 +1,6 @@
 <resources>
 	<string name="app_name">WongnaiAssignment</string>
-    <string name="coin_description">Bitcoin is the first decentralized digital currency that can be sent through the internet globally without using financial institutions like banks. The network is controlled by many of its users, instead of a few entities.</string>
+    <string name="coin_description">Bitcoin is the first decentralized digital currency that can be sent through the internet globally without using financial institutions like banks.</string>
     <string name="coin_name">Coin Name</string>
-    <string name="search">Search</string>
+    <string name="search">ค้นหา</string>
 </resources>

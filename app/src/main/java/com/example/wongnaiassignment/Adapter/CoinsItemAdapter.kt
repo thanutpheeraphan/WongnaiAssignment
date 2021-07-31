@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wongnaiassignment.Model.Coin
-import com.example.wongnaiassignment.ViewHolder.FifthCoinViewHolder
-import com.example.wongnaiassignment.ViewHolder.NormalCoinViewHolder
+import com.example.wongnaiassignment.ViewHolder.DifferentViewHolder
+import com.example.wongnaiassignment.ViewHolder.StandardViewHolder
 import com.example.wongnaiassignment.databinding.ItemContainerCoinsBinding
 import com.example.wongnaiassignment.databinding.ItemContainerFifthCoinBinding
 import com.example.wongnaiassignment.utils.DiffUtilCallBack
@@ -23,9 +23,9 @@ class CoinsItemAdapter : PagingDataAdapter<Coin, RecyclerView.ViewHolder>(DiffUt
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            1111 -> (holder as NormalCoinViewHolder).bind(getItem(position))
+            1111 -> (holder as StandardViewHolder).bind(getItem(position))
             else -> {
-                (holder as FifthCoinViewHolder).bind(getItem(position))
+                (holder as DifferentViewHolder).bind(getItem(position))
             }
         }
 
@@ -34,7 +34,7 @@ class CoinsItemAdapter : PagingDataAdapter<Coin, RecyclerView.ViewHolder>(DiffUt
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            1111 -> NormalCoinViewHolder(
+            1111 -> StandardViewHolder(
                 ItemContainerCoinsBinding.inflate(
                     LayoutInflater.from(
                         parent.context
@@ -42,7 +42,7 @@ class CoinsItemAdapter : PagingDataAdapter<Coin, RecyclerView.ViewHolder>(DiffUt
                 )
             )
             else -> {
-                FifthCoinViewHolder(
+                DifferentViewHolder(
                     ItemContainerFifthCoinBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,

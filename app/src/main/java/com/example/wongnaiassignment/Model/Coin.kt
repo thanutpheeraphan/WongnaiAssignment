@@ -1,11 +1,11 @@
 package com.example.wongnaiassignment.Model
 
-data class ResponseData(
+data class Response(
     val status: String,
-    val data: DataS,
+    val data: CoinList,
 )
 
-data class DataS(
+data class CoinList(
     val coins: List<Coin>,
 )
 

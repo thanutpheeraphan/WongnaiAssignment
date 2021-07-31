@@ -8,7 +8,7 @@ import com.example.wongnaiassignment.R
 import com.example.wongnaiassignment.databinding.ItemContainerFifthCoinBinding
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 
-class FifthCoinViewHolder(private val binding: ItemContainerFifthCoinBinding) :
+class DifferentViewHolder(private val binding: ItemContainerFifthCoinBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(data: Coin?) {
         binding.coinName.text = data?.name

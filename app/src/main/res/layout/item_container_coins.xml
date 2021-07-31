@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <data>
 
@@ -11,45 +12,51 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/_8sdp"
-        android:paddingBottom="@dimen/_8sdp">
+        android:background="@drawable/recyclerview_item_border">
 
 
         <ImageView
             android:id="@+id/coin_image"
             android:layout_width="@dimen/_32sdp"
             android:layout_height="@dimen/_32sdp"
+            android:layout_marginStart="16dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="@+id/coin_description"
-            app:layout_constraintEnd_toStartOf="@+id/coin_description"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/coin_name" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/coin_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:layout_marginTop="16dp"
             android:gravity="start"
             android:text="@string/coin_name"
             android:textAlignment="textStart"
-            android:textSize="@dimen/_16sdp"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/coin_description"
             app:layout_constraintStart_toStartOf="@+id/coin_description"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/coin_description"
-            android:layout_width="@dimen/_255sdp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:ellipsize="end"
             android:maxLines="3"
             android:minLines="0"
             android:text="@string/coin_description"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/coin_name" />
+            app:layout_constraintStart_toEndOf="@+id/coin_image"
+            app:layout_constraintTop_toTopOf="@+id/coin_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

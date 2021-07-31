@@ -11,13 +11,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_14sdp">
+        android:background="@drawable/recyclerview_item_border">
 
 
         <ImageView
             android:id="@+id/coin_image"
             android:layout_width="@dimen/_32sdp"
             android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,12 +31,13 @@
             android:id="@+id/coin_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:fontFamily="sans-serif"
+            android:layout_marginEnd="16dp"
             android:gravity="start"
             android:text="@string/coin_name"
             android:textAlignment="textStart"
-            android:textSize="@dimen/_16sdp"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/coin_image"
             app:layout_constraintEnd_toStartOf="@+id/coin_image"
             app:layout_constraintTop_toTopOf="@+id/coin_image" />
